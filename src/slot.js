@@ -91,10 +91,8 @@ export const createSlot = () => {
 
       return (
         <div {...props} {...lastChild.props} style={{ ...style, ...lastStyle }}>
-          {(!replace || !this.hasPortals()) && [
-            children,
-            this.hasPortals() ? divider : null
-          ]}
+          {(!replace || !this.hasPortals()) && children}
+          {this.hasPortals() ? divider : null}
           {multiple ? childList : childList.slice(-1)}
         </div>
       );
@@ -112,7 +110,6 @@ export const createSlot = () => {
     update = () => slot.update && slot.update(this.props);
 
     componentDidMount() {
-      console.log("id", this.id);
       slot.portals[this.id] = this.props;
       this.update();
     }

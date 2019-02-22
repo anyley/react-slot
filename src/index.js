@@ -21,11 +21,11 @@ function App() {
   return (
     <div className="App">
       <StyledHeader multiple divider={<hr />} value="3">
-        <div style={{ color: "#aaa" }}>Здесь мог быть ваш заголовок...</div>
+        Здесь мог быть ваш заголовок...
       </StyledHeader>
 
       <button onClick={() => setShow(!show)}>
-        {show ? "Скрыть" : "Показать"} комнонент с заголовками
+        {show ? "Скрыть" : "Показать"} компонент с заголовками
       </button>
 
       {show && <ComponentWithHeader />}
