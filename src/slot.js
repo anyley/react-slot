@@ -92,7 +92,7 @@ export const createSlot = () => {
       return (
         <div {...props} {...lastChild.props} style={{ ...style, ...lastStyle }}>
           {(!replace || !this.hasPortals()) && children}
-          {this.hasPortals() ? divider : null}
+          {children && this.hasPortals() && !replace ? divider : null}
           {multiple ? childList : childList.slice(-1)}
         </div>
       );

@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import styled from "styled-components";
 import "./styles.css";
 import { createSlot } from "./slot";
+import { Router, Link } from "@reach/router";
 
 const Header = createSlot();
 
