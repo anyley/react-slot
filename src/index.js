@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import ReactDOM from "react-dom";
-import styled from "styled-components";
-import "./styles.css";
-import { createSlot } from "./slot";
-import { Router, Link } from "@reach/router";
+import React, { useState } from 'react'
+import ReactDOM from 'react-dom'
+import styled from 'styled-components'
+import './styles.css'
+import { createSlot } from './slot'
+import { Router, Link } from '@reach/router'
 
-const Header = createSlot();
+const Header = createSlot()
 
 const StyledHeader = styled(Header.Slot)`
   margin: 20px;
@@ -14,10 +14,10 @@ const StyledHeader = styled(Header.Slot)`
   border-radius: 20px;
   border: 1px solid #ddd;
   box-shadow: 2px 2px 20px #ccc;
-`;
+`
 
 function App() {
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(false)
 
   return (
     <div className="App">
@@ -26,12 +26,12 @@ function App() {
       </StyledHeader>
 
       <button onClick={() => setShow(!show)}>
-        {show ? "Скрыть" : "Показать"} компонент с заголовками
+        {show ? 'Скрыть' : 'Показать'} компонент с заголовками
       </button>
 
       {show && <ComponentWithHeader />}
     </div>
-  );
+  )
 }
 
 const ComponentWithHeader = ({ header }) => (
@@ -48,7 +48,7 @@ const ComponentWithHeader = ({ header }) => (
       {props => <div>Заголовок {props.value}</div>}
     </Header.Portal>
   </div>
-);
+)
 
-const rootElement = document.getElementById("root");
-ReactDOM.render(<App />, rootElement);
+const rootElement = document.getElementById('root')
+ReactDOM.render(<App />, rootElement)
