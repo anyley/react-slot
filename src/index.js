@@ -1,54 +1,63 @@
 import React, { useState } from 'react'
-import ReactDOM from 'react-dom'
-import styled from 'styled-components'
-import './styles.css'
-import { createSlot } from './slot'
+import { render } from 'react-dom'
 import { Router, Link } from '@reach/router'
+import { createSlot } from '@react-wm/react-slots'
+import './styles.css'
+import { HeadersPage } from './headers'
 
-const Header = createSlot()
-
-const StyledHeader = styled(Header.Slot)`
-  margin: 20px;
-  padding: 20px;
-  background-color: #eee;
-  border-radius: 20px;
-  border: 1px solid #ddd;
-  box-shadow: 2px 2px 20px #ccc;
-`
+export const Breadcrambs = createSlot()
+export const Header = createSlot()
 
 function App() {
-  const [show, setShow] = useState(false)
-
   return (
     <div className="App">
-      <StyledHeader multiple divider={<hr />} value="3">
-        Здесь мог быть ваш заголовок...
-      </StyledHeader>
+      <Breadcrambs.Slot className="breadcrambs" multiple divider=" > " />
 
-      <button onClick={() => setShow(!show)}>
-        {show ? 'Скрыть' : 'Показать'} компонент с заголовками
-      </button>
+      <Breadcrambs.Portal order={0}>
+        <Link to="/">Home page</Link>
+      </Breadcrambs.Portal>
 
-      {show && <ComponentWithHeader />}
+      <Header.Slot className="header" multiple divider={<hr />} value="3">
+        Header place...
+      </Header.Slot>
+
+      <Router>
+        <HomePage default />
+        <HeadersPage path="headers" />
+        <OtherPage path="other" />
+      </Router>
+
+      <ul>
+        <li>
+          <Link to="headers">Headers page</Link>
+        </li>
+        <li>
+          <Link to="other">Other page</Link>
+        </li>
+      </ul>
     </div>
   )
 }
 
-const ComponentWithHeader = ({ header }) => (
+const HomePage = () => (
   <div>
-    <Header.Portal order={1}>Заголовок 1</Header.Portal>
-
-    <h2>1. Start editing to see some magic happen!</h2>
-
-    <Header.Portal order={2} render={() => <div>Заголовок 2</div>} />
-
-    <h2>2. Start editing to see some magic happen!</h2>
-
-    <Header.Portal order={3}>
-      {props => <div>Заголовок {props.value}</div>}
+    <Header.Portal>
+      <h1>Home page</h1>
     </Header.Portal>
   </div>
 )
 
-const rootElement = document.getElementById('root')
-ReactDOM.render(<App />, rootElement)
+const OtherPage = () => (
+  <div>
+    <Breadcrambs.Portal order={1}>
+      <Link to="/other">Other page</Link>
+    </Breadcrambs.Portal>
+
+    <Header.Portal>
+      <h1>Other page</h1>
+    </Header.Portal>
+  </div>
+)
+
+const rootElement = document.querySelector('#root')
+render(<App />, rootElement)
